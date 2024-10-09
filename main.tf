@@ -12,7 +12,8 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "test_bucket" {
-  name          = "my-test-bucket"
+  project   = "devops9700"
+  name          = "my-test-bucketdevops9700"
   location     = "us-central1"
   uniform_bucket_level_access = true
 }
