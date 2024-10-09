@@ -12,8 +12,7 @@ steps:
       terraform validate
       echo "check backend connection"
       terraform providers
-  options:
-    logging: CLOUD_LOGGING_ONLY
+
 
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
@@ -24,8 +23,7 @@ steps:
       echo "run plan and save to GCS bucket"
       terraform plan -out terraform.plan
       gsutil cp terraform.plan gs://my-test-bucketdevops9700/$BRANCH_NAME/terraform.plan
-  options:
-    logging: CLOUD_LOGGING_ONLY
+
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
@@ -36,5 +34,5 @@ steps:
       echo "apply the plan from GCS bucket"
       gsutil cp gs://my-test-bucketdevops9700/$BRANCH_NAME/terraform.plan terraform.plan
       terraform apply -auto-approve terraform.plan
-  options:
-    logging: CLOUD_LOGGING_ONLY
+options:
+  logging: CLOUD_LOGGING_ONLY
