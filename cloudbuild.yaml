@@ -1,4 +1,4 @@
-# Define the service account to be used for the build
+# Define the service acount to be used for the build
 serviceAccount: "terraform-iac@devops9700.iam.gserviceaccount.com" 
 
 steps:
