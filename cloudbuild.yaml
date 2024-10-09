@@ -1,18 +1,40 @@
 steps:
-- id: 'tf plan'
+- id: 'validate'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args:
   - '-c'
   - |
       echo "branch $BRANCH_NAME"
-      cd terraform/environments/$BRANCH_NAME
       echo "run init"
       terraform init
       echo "run validate"
       terraform validate
-      echo "run plan"
+      echo "check backend connection"
+      terraform providers
+  options:
+    logging: CLOUD_LOGGING_ONLY
+
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      echo "run plan and save to GCS bucket"
       terraform plan -out terraform.plan
+      gsutil cp terraform.plan gs://my-test-bucketdevops9700/$BRANCH_NAME/terraform.plan
+  options:
+    logging: CLOUD_LOGGING_ONLY
+
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      echo "apply the plan from GCS bucket"
+      gsutil cp gs://my-test-bucketdevops9700/$BRANCH_NAME/terraform.plan terraform.plan
       terraform apply -auto-approve terraform.plan
-options:
-  logging: CLOUD_LOGGING_ONLY
+  options:
+    logging: CLOUD_LOGGING_ONLY
