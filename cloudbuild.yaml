@@ -1,37 +1,10 @@
-# Define the service acount to be used for the build
-serviceAccount: "terraform-iac@devops9700.iam.gserviceaccount.com" 
-
 steps:
-- name: 'Download credentials file'
-  script: |
-    # Download the service account credentials from Secret Manager
-    gcloud secrets versions access latest --secret=cloudbuild-credentials \
-      --project "[PROJECT_ID]" > credentials.json
-
-- name: 'Create Terraform configuration'
-  script: |
-    # Create a temporary directory for Terraform configuration
-    mkdir terraform_config
-
-    # Copy the downloaded credentials file
-    cp credentials.json terraform_config/
-
-    # Copy the existing main.tf file
-    cp ../main.tf terraform_config/
-
-- name: 'Initialize Terraform'
-  script: |
-    terraform init
-
-- name: 'Plan Terraform changes'
-  script: |
-    terraform plan -out terraform.tfplan
-
-- name: 'Apply Terraform changes'
-  script: |
-    terraform apply -auto-approve
-
-- name: 'Upload Terraform state and plan files to bucket'
-  script: |
-    gsutil cp terraform.tfplan gs://my-test-bucket/terraform.tfplan
-    gsutil cp terraform.tfstate gs://my-test-bucket/terraform.tfstate
+  - id: 'terraform init'
+    name: 'hashicorp/terraform:1.0.0'
+    script: terraform init
+  - id: 'terraform plan'
+    name: 'hashicorp/terraform:1.0.0'
+    script: terraform plan
+  - id: 'terraform apply'
+    name: 'hashicorp/terraform:1.0.0'
+    script: terraform apply --auto-approve
