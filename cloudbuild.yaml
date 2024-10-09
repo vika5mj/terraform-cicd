@@ -20,17 +20,14 @@ steps:
     cp ../main.tf terraform_config/
 
 - name: 'Initialize Terraform'
-  working_directory: terraform_config
   script: |
     terraform init
 
 - name: 'Plan Terraform changes'
-  working_directory: terraform_config
   script: |
     terraform plan -out terraform.tfplan
 
 - name: 'Apply Terraform changes'
-  working_directory: terraform_config
   script: |
     terraform apply -auto-approve
 
