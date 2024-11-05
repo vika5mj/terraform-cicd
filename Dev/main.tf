@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
     bucket = "terraform-iac-devops9700"
-    prefix = "terraform/state"
+    prefix = "terraform/Dev/state"
   }
   required_providers {
     google = {
