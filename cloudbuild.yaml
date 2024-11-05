@@ -30,7 +30,7 @@ steps:
   args:
   - 'cp'
   - 'terraform.plan'
-  - 'gs://my-test-bucketdevops9700/$BRANCH_NAME/terraform.plan'
+  - 'gs://my-test-bucketdevops9700/$BRANCH_NAME/$COMMIT_SHA/terraform.plan'
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
