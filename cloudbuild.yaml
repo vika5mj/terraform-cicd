@@ -1,5 +1,5 @@
 substitutions:
-  _ENV: "Dev"
+  _ENV: ""
 
 steps:
 - id: 'validate'
