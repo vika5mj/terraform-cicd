@@ -1,6 +1,5 @@
 substitutions:
   _ENV: "Dev"
-  _PLAN_BUCKET_NAME: ""  # Replace with your bucket name
 
 steps:
 - id: 'validate'
@@ -10,6 +9,7 @@ steps:
   - '-c'
   - |
       echo "branch $BRANCH_NAME"
+      echo "REPOOOOOOOO -- $REPO_NAME"
       echo "run init"
       cd ${_ENV}
       terraform init
