@@ -54,7 +54,7 @@ steps:
   - 'publish'
   - 'cd-trigger-topic'
   - '--message'
-  - '{"_BRANCH_NAME":"$BRANCH_NAME", "_ENV":"$ENV", "_COMMIT_SHA":"$COMMIT_SHA"}'
+  - '{"_BRANCH_NAME":"$_BRANCH_NAME", "_ENV":"$_ENV", "_COMMIT_SHA":"$_COMMIT_SHA"}'
 
 # - id: 'tf apply'
 #   name: 'hashicorp/terraform:1.0.0'
