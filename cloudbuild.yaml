@@ -55,5 +55,5 @@ steps:
 #       echo "apply the plan from GCS bucket"
 #       cd ${_ENV}
 #       terraform apply -auto-approve terraform.plan
-# options:
-#   logging: CLOUD_LOGGING_ONLY
+options:
+  logging: CLOUD_LOGGING_ONLY
