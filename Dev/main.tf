@@ -15,7 +15,7 @@ provider "google" {
   region = "us-central1"
 }
 
-# resource "google_storage_bucket" "test_bucket" {
+# resource "google_storage_bucket" "test_bucket1" {
 #   project   = "devops9700"
 #   name          = "my-test-bucketdevops9700-1"
 #   location     = "us-central1"
