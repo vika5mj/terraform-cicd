@@ -10,16 +10,18 @@ steps:
     args:
       - '-c'
       - |
-        echo "Unzipping the plan file..."
-        unzip terraform-artifacts.zip
+        echo "Creating new directory and unzipping the plan file..."
+        mkdir -p /workspace/${_ENV}_terraform && cd /workspace/${_ENV}_terraform
+        unzip /workspace/terraform-artifacts.zip
     id: unzip-plan
+    
     entrypoint: sh
   - name: 'hashicorp/terraform:1.0.0'
     args:
       - '-c'
       - |
         echo "Applying the Terraform plan..."
-        cd ${_ENV}
+        cd /workspace/${_ENV}_terraform/${_ENV}
         terraform init -input=false
         terraform apply -auto-approve terraform.plan
     id: terraform-apply
