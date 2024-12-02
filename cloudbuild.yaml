@@ -36,7 +36,7 @@ steps:
   - '-c'
   - |
       echo "Zipping terraform.plan..."
-      zip terraform-artifacts.zip ${_ENV}/terraform.plan ${_ENV}/.terraform ${_ENV}/provider.tf
+      zip terraform-artifacts.zip ${_ENV}/terraform.plan ${_ENV}/.terraform ${_ENV}/main.tf
 
 # Step to copy the plan file to a GCS bucket using gsutil
 - id: 'upload plan to GCS'
